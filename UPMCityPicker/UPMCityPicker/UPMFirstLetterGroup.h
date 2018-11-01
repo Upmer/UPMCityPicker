@@ -12,6 +12,7 @@
 @interface UPMFirstLetterGroup : NSObject
 
 @property (nonatomic, copy) NSString *firstLetter;
+@property (nonatomic, copy) NSString *indexString;
 @property (nonatomic, strong) NSArray<UPMCityInfo *> *cities;
 
 + (instancetype)groupWithDictionary:(NSDictionary *)dict;

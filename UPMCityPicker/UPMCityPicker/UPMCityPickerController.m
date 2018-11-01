@@ -46,6 +46,16 @@
                 [groups removeObject:group];
             }
         }
+        
+        NSArray<UPMCityInfo *> *historyCities = [UPMCityInfo historyCities];
+        if (historyCities && historyCities.count > 0) {
+            UPMFirstLetterGroup *historyGroup = [[UPMFirstLetterGroup alloc] init];
+            historyGroup.firstLetter = NSLocalizedString(@"历史访问城市", nil);
+            historyGroup.indexString = NSLocalizedString(@"历史", nil);
+            historyGroup.cities = historyCities;
+            [groups insertObject:historyGroup atIndex:0];
+        }
+        
         self.cityGroups = [NSArray arrayWithArray:groups];
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -93,15 +103,24 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     UPMFirstLetterGroup *group = self.cityGroups[section];
-    return group.firstLetter;
+    return group.firstLetter.uppercaseString;
 }
 
 - (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView {
     NSMutableArray *titles = [NSMutableArray array];
     for (UPMFirstLetterGroup *group in self.cityGroups) {
-        [titles addObject:group.firstLetter.uppercaseString];
+        NSString *indexString = group.firstLetter.uppercaseString;
+        if (group.indexString.length > 0) {
+            indexString = group.indexString;
+        }
+        [titles addObject:indexString];
     }
     return [NSArray arrayWithArray:titles];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSArray<UPMCityInfo *> *cities = self.cityGroups[indexPath.section].cities;
+    [cities[indexPath.row] save];
 }
 
 @end

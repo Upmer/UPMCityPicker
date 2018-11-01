@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UPMCityInfo : NSObject
+@interface UPMCityInfo : NSObject <NSCoding>
 
 @property (nonatomic, copy) NSString *ID;
 @property (nonatomic, copy) NSString *name;
@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 
 - (void)save;
+
++ (NSArray<UPMCityInfo *> *)historyCities;
 
 @end
 
