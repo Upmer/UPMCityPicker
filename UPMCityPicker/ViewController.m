@@ -17,6 +17,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    NSString *a = @"a";
+    int aCode = [a characterAtIndex:0];
+    NSLog(@"%d", aCode);
+    NSLog(@"%@", [NSString stringWithFormat:@"%c", aCode + 1]);
+    
 }
 
 

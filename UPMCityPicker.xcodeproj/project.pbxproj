@@ -15,6 +15,10 @@
 		83E2235E218ADE0200F669CA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E2235D218ADE0200F669CA /* main.m */; };
 		83E22368218ADE0200F669CA /* UPMCityPickerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E22367218ADE0200F669CA /* UPMCityPickerTests.m */; };
 		83E22373218ADE0200F669CA /* UPMCityPickerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E22372218ADE0200F669CA /* UPMCityPickerUITests.m */; };
+		83E22383218AE05800F669CA /* UPMCityPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E22382218AE05800F669CA /* UPMCityPickerController.m */; };
+		83E22385218AE62800F669CA /* UPMCityPicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 83E22384218AE62800F669CA /* UPMCityPicker.bundle */; };
+		83E22388218AE64500F669CA /* UPMCityInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E22387218AE64500F669CA /* UPMCityInfo.m */; };
+		83E2238B218AED5400F669CA /* UPMFirstLetterGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E2238A218AED5400F669CA /* UPMFirstLetterGroup.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,13 @@
 		83E2236E218ADE0200F669CA /* UPMCityPickerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UPMCityPickerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83E22372218ADE0200F669CA /* UPMCityPickerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UPMCityPickerUITests.m; sourceTree = "<group>"; };
 		83E22374218ADE0200F669CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83E22381218AE05800F669CA /* UPMCityPickerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UPMCityPickerController.h; sourceTree = "<group>"; };
+		83E22382218AE05800F669CA /* UPMCityPickerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UPMCityPickerController.m; sourceTree = "<group>"; };
+		83E22384218AE62800F669CA /* UPMCityPicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UPMCityPicker.bundle; sourceTree = "<group>"; };
+		83E22386218AE64500F669CA /* UPMCityInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UPMCityInfo.h; sourceTree = "<group>"; };
+		83E22387218AE64500F669CA /* UPMCityInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UPMCityInfo.m; sourceTree = "<group>"; };
+		83E22389218AED5400F669CA /* UPMFirstLetterGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UPMFirstLetterGroup.h; sourceTree = "<group>"; };
+		83E2238A218AED5400F669CA /* UPMFirstLetterGroup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UPMFirstLetterGroup.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +112,7 @@
 		83E2234D218ADE0100F669CA /* UPMCityPicker */ = {
 			isa = PBXGroup;
 			children = (
+				83E22380218AE04500F669CA /* UPMCityPicker */,
 				83E2234E218ADE0100F669CA /* AppDelegate.h */,
 				83E2234F218ADE0100F669CA /* AppDelegate.m */,
 				83E22351218ADE0100F669CA /* ViewController.h */,
@@ -130,6 +142,20 @@
 				83E22374218ADE0200F669CA /* Info.plist */,
 			);
 			path = UPMCityPickerUITests;
+			sourceTree = "<group>";
+		};
+		83E22380218AE04500F669CA /* UPMCityPicker */ = {
+			isa = PBXGroup;
+			children = (
+				83E22384218AE62800F669CA /* UPMCityPicker.bundle */,
+				83E22381218AE05800F669CA /* UPMCityPickerController.h */,
+				83E22382218AE05800F669CA /* UPMCityPickerController.m */,
+				83E22386218AE64500F669CA /* UPMCityInfo.h */,
+				83E22387218AE64500F669CA /* UPMCityInfo.m */,
+				83E22389218AED5400F669CA /* UPMFirstLetterGroup.h */,
+				83E2238A218AED5400F669CA /* UPMFirstLetterGroup.m */,
+			);
+			path = UPMCityPicker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,6 +220,7 @@
 		83E22343218ADE0100F669CA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = UPM;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = upmer;
 				TargetAttributes = {
@@ -236,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83E2235B218ADE0200F669CA /* LaunchScreen.storyboard in Resources */,
+				83E22385218AE62800F669CA /* UPMCityPicker.bundle in Resources */,
 				83E22358218ADE0200F669CA /* Assets.xcassets in Resources */,
 				83E22356218ADE0100F669CA /* Main.storyboard in Resources */,
 			);
@@ -263,8 +291,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				83E22353218ADE0100F669CA /* ViewController.m in Sources */,
+				83E2238B218AED5400F669CA /* UPMFirstLetterGroup.m in Sources */,
+				83E22383218AE05800F669CA /* UPMCityPickerController.m in Sources */,
 				83E2235E218ADE0200F669CA /* main.m in Sources */,
 				83E22350218ADE0100F669CA /* AppDelegate.m in Sources */,
+				83E22388218AE64500F669CA /* UPMCityInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +468,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = UPMCityPicker/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -453,6 +485,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = UPMCityPicker/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
