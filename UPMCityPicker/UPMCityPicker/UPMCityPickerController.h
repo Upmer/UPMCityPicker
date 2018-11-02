@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UPMCityPickerController : UIViewController
 
+@property (nonatomic, weak) id<UPMCityPickerControllerDelegate> delegate;
+
 - (instancetype)initWithConfig:(UPMCityPickerConfig *)config;
 
 @end

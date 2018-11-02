@@ -8,10 +8,20 @@
 
 #import <UIKit/UIKit.h>
 @class UPMCityInfo;
+@class UPMExtraGroupCell;
+
+@protocol UPMExtraGroupCellDelegate <NSObject>
+
+@optional
+- (void)extraGroupCell:(UPMExtraGroupCell *)cell didSelectedCityName:(NSString *)city;
+
+@end
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UPMExtraGroupCell : UITableViewCell
+
+@property (nonatomic, weak) id<UPMExtraGroupCellDelegate> delegate;
 
 @property (nonatomic, strong) NSArray<UPMCityInfo *> *cities;
 

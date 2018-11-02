@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "UPMCityPickerController.h"
 
-@interface ViewController ()
+@interface ViewController () <UPMCityPickerControllerDelegate>
 
 @end
 
@@ -29,8 +29,13 @@
     UPMCityPickerConfig *config = [[UPMCityPickerConfig alloc] init];
     config.hotCities = @[@"北京", @"上海", @"广州", @"深圳", @"杭州", @"成都"];
     UPMCityPickerController *picker = [[UPMCityPickerController alloc] initWithConfig:config];
+    picker.delegate = self;
     [self.navigationController pushViewController:picker animated:YES];
 }
 
+- (void)cityPickerController:(UPMCityPickerController *)picker didSelectedCityName:(NSString *)city {
+    NSLog(@"%@", city);
+    [picker.navigationController popViewControllerAnimated:YES];
+}
 
 @end

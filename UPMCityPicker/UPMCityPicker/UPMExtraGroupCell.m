@@ -83,4 +83,10 @@
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if ([_delegate respondsToSelector:@selector(extraGroupCell:didSelectedCityName:)]) {
+        [_delegate extraGroupCell:self didSelectedCityName:self.cities[indexPath.item].name];
+    }
+}
+
 @end

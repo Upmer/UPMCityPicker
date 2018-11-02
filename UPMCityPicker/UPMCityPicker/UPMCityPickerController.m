@@ -10,7 +10,7 @@
 #import "UPMFirstLetterGroup.h"
 #import "UPMExtraGroupCell.h"
 
-@interface UPMCityPickerController () <UITableViewDataSource, UITableViewDelegate>
+@interface UPMCityPickerController () <UITableViewDataSource, UITableViewDelegate, UPMExtraGroupCellDelegate>
 
 @property (nonatomic, strong) UPMCityPickerConfig *config;
 
@@ -59,7 +59,7 @@
             }
         }
         
-        // hot cities
+        // TODO: hot cities optimize
         NSMutableArray *hotCities = [NSMutableArray array];
         if (self.config.hotCities.count > 0) {
             for (UPMFirstLetterGroup *group in groups) {
@@ -67,7 +67,6 @@
                     if ([self.config.hotCities containsObject:info.name]) {
                         [hotCities addObject:info];
                     }
-                    
                 }
             }
             if (hotCities.count > 0) {
@@ -142,6 +141,7 @@
     if (group.indexString.length > 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"extraCell" forIndexPath:indexPath];
         ((UPMExtraGroupCell *)cell).cities = group.cities;
+        ((UPMExtraGroupCell *)cell).delegate = self;
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:@"cityCell" forIndexPath:indexPath];
         NSArray<UPMCityInfo *> *cities = self.cityGroups[indexPath.section].cities;
@@ -184,6 +184,15 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     NSArray<UPMCityInfo *> *cities = self.cityGroups[indexPath.section].cities;
     [cities[indexPath.row] save];
+    if ([_delegate respondsToSelector:@selector(cityPickerController:didSelectedCityName:)]) {
+        [_delegate cityPickerController:self didSelectedCityName:cities[indexPath.item].name];
+    }
+}
+
+- (void)extraGroupCell:(UPMExtraGroupCell *)cell didSelectedCityName:(NSString *)city {
+    if ([_delegate respondsToSelector:@selector(cityPickerController:didSelectedCityName:)]) {
+        [_delegate cityPickerController:self didSelectedCityName:city];
+    }
 }
 
 @end
