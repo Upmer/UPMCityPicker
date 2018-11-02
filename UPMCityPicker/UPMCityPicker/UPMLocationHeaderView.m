@@ -55,8 +55,13 @@
     titleLabel.layer.cornerRadius = 5;
     titleLabel.clipsToBounds = YES;
     titleLabel.adjustsImageWhenHighlighted = NO;
-    [titleLabel addTarget:self action:@selector(onClick) forControlEvents:UIControlStateNormal];
+    [titleLabel addTarget:self action:@selector(onClick) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:titleLabel];
+}
+
+- (void)setName:(NSString *)name {
+    _name = name;
+    [self.titleLabel setTitle:name forState:UIControlStateNormal];
 }
 
 - (void)layoutSubviews {

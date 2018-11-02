@@ -12,7 +12,7 @@
 #import "UPMLocationHeaderView.h"
 #import <CoreLocation/CoreLocation.h>
 
-@interface UPMCityPickerController () <UITableViewDataSource, UITableViewDelegate, UPMExtraGroupCellDelegate, CLLocationManagerDelegate>
+@interface UPMCityPickerController () <UITableViewDataSource, UITableViewDelegate, UPMExtraGroupCellDelegate, CLLocationManagerDelegate, UPMLocationHeaderViewDelegate>
 
 @property (nonatomic, strong) UPMCityPickerConfig *config;
 
@@ -21,6 +21,9 @@
 @property (nonatomic, strong) NSArray<UPMFirstLetterGroup *> *cityGroups;
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, strong) CLGeocoder *geocoder;
+
+@property (nonatomic, assign) NSUInteger locationUpdateCount;
 
 @end
 
@@ -51,6 +54,7 @@
 - (UPMLocationHeaderView *)headerView {
     if (!_headerView) {
         _headerView = [[UPMLocationHeaderView alloc] init];
+        _headerView.delegate = self;
         _headerView.frame = CGRectMake(0, 0, 0, 28 + 50);
     }
     return _headerView;
@@ -161,7 +165,6 @@
     } else {
         NSArray *cities = self.cityGroups[section].cities;
         return cities.count;
-        
     }
 }
 
@@ -225,17 +228,48 @@
     }
 }
 
+- (void)locationHeaderView:(UPMLocationHeaderView *)headerView didSelectedCityName:(NSString *)city {
+    if ([_delegate respondsToSelector:@selector(cityPickerController:didSelectedCityName:)]) {
+        [_delegate cityPickerController:self didSelectedCityName:city];
+    }
+}
+
+#pragma mark - CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     if (status == kCLAuthorizationStatusAuthorizedAlways || status == kCLAuthorizationStatusAuthorizedWhenInUse) {
-        [manager startUpdatingLocation];
-    } else {
+        if (self.config.isUseLocation) {
+            [manager startUpdatingLocation];
+        }
+    } else if (status == kCLAuthorizationStatusDenied) {
         self.config.useLocation = NO;
         self.tableView.tableHeaderView = [[UIView alloc] init];
     }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-    
+    self.locationUpdateCount++;
+    [manager stopUpdatingLocation];
+    CLLocation *location = locations.firstObject;
+    self.geocoder = [[CLGeocoder alloc] init];
+    [self.geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if (error || placemarks.count == 0) {
+            if (self.locationUpdateCount >= 5) {
+                self.headerView.name = @"定位错误";
+                self.locationManager = nil;
+            } else {
+                [manager startUpdatingLocation];
+            }
+        } else {
+            for (CLPlacemark *placemark in placemarks) {
+                if (placemark.locality.length > 0) {
+                    self.headerView.name = placemark.locality;
+                    self.locationManager = nil;
+                    return;
+                }
+            }
+            [manager startUpdatingLocation];
+        }
+    }];
 }
 
 @end
