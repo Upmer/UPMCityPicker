@@ -9,13 +9,18 @@
 #import "UPMCityPickerController.h"
 #import "UPMFirstLetterGroup.h"
 #import "UPMExtraGroupCell.h"
+#import "UPMLocationHeaderView.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface UPMCityPickerController () <UITableViewDataSource, UITableViewDelegate, UPMExtraGroupCellDelegate>
+@interface UPMCityPickerController () <UITableViewDataSource, UITableViewDelegate, UPMExtraGroupCellDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, strong) UPMCityPickerConfig *config;
 
+@property (nonatomic, strong) UPMLocationHeaderView *headerView;
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic, strong) NSArray<UPMFirstLetterGroup *> *cityGroups;
+
+@property (nonatomic, strong) CLLocationManager *locationManager;
 
 @end
 
@@ -41,6 +46,14 @@
         [self prepareData];
     }
     return self;
+}
+
+- (UPMLocationHeaderView *)headerView {
+    if (!_headerView) {
+        _headerView = [[UPMLocationHeaderView alloc] init];
+        _headerView.frame = CGRectMake(0, 0, 0, 28 + 50);
+    }
+    return _headerView;
 }
 
 - (void)prepareData {
@@ -100,6 +113,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    if (![CLLocationManager locationServicesEnabled] && !self.config.isUseLocation) {
+        self.config.useLocation = NO;
+    } else {
+        if (status == kCLAuthorizationStatusNotDetermined) {
+            [self.locationManager requestWhenInUseAuthorization];
+        } else if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status == kCLAuthorizationStatusAuthorizedAlways) {
+            [self.locationManager startUpdatingLocation];
+        }
+    }
+    
     UITableView *tableView = [[UITableView alloc] init];
     self.tableView = tableView;
     tableView.dataSource = self;
@@ -110,6 +136,10 @@
     tableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:tableView];
     tableView.tintColor = UIColor.blackColor;
+    
+    if (self.config.isUseLocation) {
+        tableView.tableHeaderView = self.headerView;
+    }
     
     if (self.navigationController == nil || self.navigationController.navigationBarHidden) {
         if (@available(iOS 11.0, *)) {
@@ -193,6 +223,19 @@
     if ([_delegate respondsToSelector:@selector(cityPickerController:didSelectedCityName:)]) {
         [_delegate cityPickerController:self didSelectedCityName:city];
     }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    if (status == kCLAuthorizationStatusAuthorizedAlways || status == kCLAuthorizationStatusAuthorizedWhenInUse) {
+        [manager startUpdatingLocation];
+    } else {
+        self.config.useLocation = NO;
+        self.tableView.tableHeaderView = [[UIView alloc] init];
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+    
 }
 
 @end

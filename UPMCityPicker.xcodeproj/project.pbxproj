@@ -22,6 +22,7 @@
 		83E22392218BF77000F669CA /* UPMExtraGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E22391218BF76F00F669CA /* UPMExtraGroupCell.m */; };
 		83E22395218BF8DF00F669CA /* UPMExtraCityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E22394218BF8DF00F669CA /* UPMExtraCityCell.m */; };
 		83E22398218C201900F669CA /* UPMCityPickerConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E22397218C201900F669CA /* UPMCityPickerConfig.m */; };
+		83E2239B218C39F400F669CA /* UPMLocationHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E2239A218C39F300F669CA /* UPMLocationHeaderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,8 @@
 		83E22394218BF8DF00F669CA /* UPMExtraCityCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UPMExtraCityCell.m; sourceTree = "<group>"; };
 		83E22396218C201900F669CA /* UPMCityPickerConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UPMCityPickerConfig.h; sourceTree = "<group>"; };
 		83E22397218C201900F669CA /* UPMCityPickerConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UPMCityPickerConfig.m; sourceTree = "<group>"; };
+		83E22399218C39F300F669CA /* UPMLocationHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UPMLocationHeaderView.h; sourceTree = "<group>"; };
+		83E2239A218C39F300F669CA /* UPMLocationHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UPMLocationHeaderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +172,8 @@
 				83E22394218BF8DF00F669CA /* UPMExtraCityCell.m */,
 				83E22396218C201900F669CA /* UPMCityPickerConfig.h */,
 				83E22397218C201900F669CA /* UPMCityPickerConfig.m */,
+				83E22399218C39F300F669CA /* UPMLocationHeaderView.h */,
+				83E2239A218C39F300F669CA /* UPMLocationHeaderView.m */,
 			);
 			path = UPMCityPicker;
 			sourceTree = "<group>";
@@ -308,6 +313,7 @@
 				83E22398218C201900F669CA /* UPMCityPickerConfig.m in Sources */,
 				83E22353218ADE0100F669CA /* ViewController.m in Sources */,
 				83E2238B218AED5400F669CA /* UPMFirstLetterGroup.m in Sources */,
+				83E2239B218C39F400F669CA /* UPMLocationHeaderView.m in Sources */,
 				83E22383218AE05800F669CA /* UPMCityPickerController.m in Sources */,
 				83E2235E218ADE0200F669CA /* main.m in Sources */,
 				83E22395218BF8DF00F669CA /* UPMExtraCityCell.m in Sources */,

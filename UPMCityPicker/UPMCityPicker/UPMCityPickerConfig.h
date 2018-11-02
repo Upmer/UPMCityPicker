@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong) NSArray<NSString *> *hotCities;
 
+@property (nonatomic, assign, getter=isUseLocation) BOOL useLocation;
+
 @end

@@ -18,16 +18,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    NSString *a = @"a";
-    int aCode = [a characterAtIndex:0];
-    NSLog(@"%d", aCode);
-    NSLog(@"%@", [NSString stringWithFormat:@"%c", aCode + 1]);
-    
 }
 
 - (IBAction)onOpenPicker:(id)sender {
     UPMCityPickerConfig *config = [[UPMCityPickerConfig alloc] init];
     config.hotCities = @[@"北京", @"上海", @"广州", @"深圳", @"杭州", @"成都"];
+    config.useLocation = YES;
     UPMCityPickerController *picker = [[UPMCityPickerController alloc] initWithConfig:config];
     picker.delegate = self;
     [self.navigationController pushViewController:picker animated:YES];
