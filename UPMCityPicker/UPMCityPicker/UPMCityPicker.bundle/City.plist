@@ -312,16 +312,6 @@
 				<key>spell</key>
 				<string>beijing</string>
 			</dict>
-			<dict>
-				<key>id</key>
-				<integer>3100</integer>
-				<key>name</key>
-				<string>北京</string>
-				<key>pid</key>
-				<integer>0</integer>
-				<key>spell</key>
-				<string>beijingshi</string>
-			</dict>
 		</array>
 		<key>letter</key>
 		<string>b</string>
@@ -329,6 +319,16 @@
 	<dict>
 		<key>cities</key>
 		<array>
+			<dict>
+				<key>id</key>
+				<integer>1109</integer>
+				<key>name</key>
+				<string>池州</string>
+				<key>pid</key>
+				<integer>1001</integer>
+				<key>spell</key>
+				<string>Chizhou</string>
+			</dict>
 			<dict>
 				<key>id</key>
 				<integer>1066</integer>
@@ -2481,16 +2481,6 @@
 		<array>
 			<dict>
 				<key>id</key>
-				<integer>1109</integer>
-				<key>name</key>
-				<string>池州</string>
-				<key>pid</key>
-				<integer>1001</integer>
-				<key>spell</key>
-				<string>Shizhou</string>
-			</dict>
-			<dict>
-				<key>id</key>
 				<integer>1128</integer>
 				<key>name</key>
 				<string>厦门</string>
@@ -2728,16 +2718,6 @@
 				<integer>47</integer>
 				<key>spell</key>
 				<string>shanghaishi</string>
-			</dict>
-			<dict>
-				<key>id</key>
-				<integer>47</integer>
-				<key>name</key>
-				<string>上海</string>
-				<key>pid</key>
-				<integer>0</integer>
-				<key>spell</key>
-				<string>Shanghaishi</string>
 			</dict>
 			<dict>
 				<key>id</key>

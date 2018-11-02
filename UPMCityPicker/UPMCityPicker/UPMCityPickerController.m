@@ -8,8 +8,11 @@
 
 #import "UPMCityPickerController.h"
 #import "UPMFirstLetterGroup.h"
+#import "UPMExtraGroupCell.h"
 
 @interface UPMCityPickerController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) UPMCityPickerConfig *config;
 
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic, strong) NSArray<UPMFirstLetterGroup *> *cityGroups;
@@ -32,7 +35,16 @@
     return self;
 }
 
+- (instancetype)initWithConfig:(UPMCityPickerConfig *)config {
+    if (self = [super init]) {
+        _config = config;
+        [self prepareData];
+    }
+    return self;
+}
+
 - (void)prepareData {
+    NSLog(@"---");
     dispatch_queue_t queue = dispatch_queue_create("com.upmer.citypicker", DISPATCH_QUEUE_CONCURRENT);
     dispatch_async(queue, ^{
         NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle].resourcePath stringByAppendingPathComponent:@"UPMCityPicker.bundle"]];
@@ -47,6 +59,27 @@
             }
         }
         
+        // hot cities
+        NSMutableArray *hotCities = [NSMutableArray array];
+        if (self.config.hotCities.count > 0) {
+            for (UPMFirstLetterGroup *group in groups) {
+                for (UPMCityInfo *info in group.cities) {
+                    if ([self.config.hotCities containsObject:info.name]) {
+                        [hotCities addObject:info];
+                    }
+                    
+                }
+            }
+            if (hotCities.count > 0) {
+                UPMFirstLetterGroup *hotGroup = [[UPMFirstLetterGroup alloc] init];
+                hotGroup.firstLetter = NSLocalizedString(@"热门城市", nil);
+                hotGroup.indexString = NSLocalizedString(@"热门", nil);
+                hotGroup.cities = [NSArray arrayWithArray:hotCities];
+                [groups insertObject:hotGroup atIndex:0];
+            }
+        }
+        
+        // history cities
         NSArray<UPMCityInfo *> *historyCities = [UPMCityInfo historyCities];
         if (historyCities && historyCities.count > 0) {
             UPMFirstLetterGroup *historyGroup = [[UPMFirstLetterGroup alloc] init];
@@ -59,6 +92,7 @@
         self.cityGroups = [NSArray arrayWithArray:groups];
         
         dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"---");
             [self.tableView reloadData];
         });
     });
@@ -69,19 +103,21 @@
     
     UITableView *tableView = [[UITableView alloc] init];
     self.tableView = tableView;
-    tableView.rowHeight = 50;
     tableView.dataSource = self;
     tableView.delegate = self;
     tableView.frame = self.view.bounds;
     [tableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"cityCell"];
+    [tableView registerClass:UPMExtraGroupCell.class forCellReuseIdentifier:@"extraCell"];
     tableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:tableView];
     tableView.tintColor = UIColor.blackColor;
     
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;//UIScrollView也适用
-    }else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
+    if (self.navigationController == nil || self.navigationController.navigationBarHidden) {
+        if (@available(iOS 11.0, *)) {
+            self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = NO;
+        }
     }
 }
 
@@ -90,15 +126,41 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSArray *cities = self.cityGroups[section].cities;
-    return cities.count;
+    UPMFirstLetterGroup *group = self.cityGroups[section];
+    if (group.indexString.length > 0) {
+        return 1;
+    } else {
+        NSArray *cities = self.cityGroups[section].cities;
+        return cities.count;
+        
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cityCell" forIndexPath:indexPath];
-    NSArray<UPMCityInfo *> *cities = self.cityGroups[indexPath.section].cities;
-    cell.textLabel.text = cities[indexPath.row].name;
+    UITableViewCell *cell;
+    UPMFirstLetterGroup *group = self.cityGroups[indexPath.section];
+    if (group.indexString.length > 0) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"extraCell" forIndexPath:indexPath];
+        ((UPMExtraGroupCell *)cell).cities = group.cities;
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"cityCell" forIndexPath:indexPath];
+        NSArray<UPMCityInfo *> *cities = self.cityGroups[indexPath.section].cities;
+        cell.textLabel.text = cities[indexPath.row].name;
+    }
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UPMFirstLetterGroup *group = self.cityGroups[indexPath.section];
+    if (group.indexString.length > 0) {
+        int count = (int)group.cities.count / 3;
+        if (group.cities.count % 3 != 0) {
+            count++;
+        }
+        CGFloat margin = 10;
+        return (30 + margin) * count + margin;
+    }
+    return 50;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -119,6 +181,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     NSArray<UPMCityInfo *> *cities = self.cityGroups[indexPath.section].cities;
     [cities[indexPath.row] save];
 }

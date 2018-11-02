@@ -19,6 +19,9 @@
 		83E22385218AE62800F669CA /* UPMCityPicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 83E22384218AE62800F669CA /* UPMCityPicker.bundle */; };
 		83E22388218AE64500F669CA /* UPMCityInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E22387218AE64500F669CA /* UPMCityInfo.m */; };
 		83E2238B218AED5400F669CA /* UPMFirstLetterGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E2238A218AED5400F669CA /* UPMFirstLetterGroup.m */; };
+		83E22392218BF77000F669CA /* UPMExtraGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E22391218BF76F00F669CA /* UPMExtraGroupCell.m */; };
+		83E22395218BF8DF00F669CA /* UPMExtraCityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E22394218BF8DF00F669CA /* UPMExtraCityCell.m */; };
+		83E22398218C201900F669CA /* UPMCityPickerConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E22397218C201900F669CA /* UPMCityPickerConfig.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +65,12 @@
 		83E22387218AE64500F669CA /* UPMCityInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UPMCityInfo.m; sourceTree = "<group>"; };
 		83E22389218AED5400F669CA /* UPMFirstLetterGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UPMFirstLetterGroup.h; sourceTree = "<group>"; };
 		83E2238A218AED5400F669CA /* UPMFirstLetterGroup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UPMFirstLetterGroup.m; sourceTree = "<group>"; };
+		83E22390218BF76F00F669CA /* UPMExtraGroupCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UPMExtraGroupCell.h; sourceTree = "<group>"; };
+		83E22391218BF76F00F669CA /* UPMExtraGroupCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UPMExtraGroupCell.m; sourceTree = "<group>"; };
+		83E22393218BF8DF00F669CA /* UPMExtraCityCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UPMExtraCityCell.h; sourceTree = "<group>"; };
+		83E22394218BF8DF00F669CA /* UPMExtraCityCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UPMExtraCityCell.m; sourceTree = "<group>"; };
+		83E22396218C201900F669CA /* UPMCityPickerConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UPMCityPickerConfig.h; sourceTree = "<group>"; };
+		83E22397218C201900F669CA /* UPMCityPickerConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UPMCityPickerConfig.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +163,12 @@
 				83E22387218AE64500F669CA /* UPMCityInfo.m */,
 				83E22389218AED5400F669CA /* UPMFirstLetterGroup.h */,
 				83E2238A218AED5400F669CA /* UPMFirstLetterGroup.m */,
+				83E22390218BF76F00F669CA /* UPMExtraGroupCell.h */,
+				83E22391218BF76F00F669CA /* UPMExtraGroupCell.m */,
+				83E22393218BF8DF00F669CA /* UPMExtraCityCell.h */,
+				83E22394218BF8DF00F669CA /* UPMExtraCityCell.m */,
+				83E22396218C201900F669CA /* UPMCityPickerConfig.h */,
+				83E22397218C201900F669CA /* UPMCityPickerConfig.m */,
 			);
 			path = UPMCityPicker;
 			sourceTree = "<group>";
@@ -290,10 +305,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83E22398218C201900F669CA /* UPMCityPickerConfig.m in Sources */,
 				83E22353218ADE0100F669CA /* ViewController.m in Sources */,
 				83E2238B218AED5400F669CA /* UPMFirstLetterGroup.m in Sources */,
 				83E22383218AE05800F669CA /* UPMCityPickerController.m in Sources */,
 				83E2235E218ADE0200F669CA /* main.m in Sources */,
+				83E22395218BF8DF00F669CA /* UPMExtraCityCell.m in Sources */,
+				83E22392218BF77000F669CA /* UPMExtraGroupCell.m in Sources */,
 				83E22350218ADE0100F669CA /* AppDelegate.m in Sources */,
 				83E22388218AE64500F669CA /* UPMCityInfo.m in Sources */,
 			);
@@ -467,6 +485,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = J34S2FKR92;
 				INFOPLIST_FILE = UPMCityPicker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -484,6 +503,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = J34S2FKR92;
 				INFOPLIST_FILE = UPMCityPicker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (

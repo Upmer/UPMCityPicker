@@ -7,10 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UPMCityPickerConfig.h"
+@class UPMCityPickerController;
+
+@protocol UPMCityPickerControllerDelegate <NSObject>
+
+@optional
+- (void)cityPickerController:(UPMCityPickerController *)picker didSelectedCityName:(NSString *)city;
+
+@end
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UPMCityPickerController : UIViewController
+
+- (instancetype)initWithConfig:(UPMCityPickerConfig *)config;
 
 @end
 
