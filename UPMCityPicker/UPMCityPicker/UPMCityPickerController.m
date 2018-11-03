@@ -55,6 +55,7 @@
     if (!_headerView) {
         _headerView = [[UPMLocationHeaderView alloc] init];
         _headerView.delegate = self;
+        _headerView.tintColor = self.config.tintColor;
         _headerView.frame = CGRectMake(0, 0, 0, 28 + 50);
     }
     return _headerView;
@@ -117,6 +118,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = self.config.navTitle;
+    
+    if (self.navigationController && self.config.backView) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.config.backView];
+    }
+    
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
@@ -139,7 +146,7 @@
     [tableView registerClass:UPMExtraGroupCell.class forCellReuseIdentifier:@"extraCell"];
     tableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:tableView];
-    tableView.tintColor = UIColor.blackColor;
+    tableView.tintColor = self.config.tintColor ?: UIColor.blackColor;
     
     if (self.config.isUseLocation) {
         tableView.tableHeaderView = self.headerView;
@@ -175,10 +182,12 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"extraCell" forIndexPath:indexPath];
         ((UPMExtraGroupCell *)cell).cities = group.cities;
         ((UPMExtraGroupCell *)cell).delegate = self;
+        ((UPMExtraGroupCell *)cell).tintColor = self.config.tintColor;
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:@"cityCell" forIndexPath:indexPath];
         NSArray<UPMCityInfo *> *cities = self.cityGroups[indexPath.section].cities;
         cell.textLabel.text = cities[indexPath.row].name;
+        cell.textLabel.textColor = self.config.tintColor ?: UIColor.blackColor;
     }
     return cell;
 }

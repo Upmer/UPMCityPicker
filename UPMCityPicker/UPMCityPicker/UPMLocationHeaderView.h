@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *name;
 
+@property (nonatomic, strong) UIColor *tintColor;
+
 @end
 
 NS_ASSUME_NONNULL_END

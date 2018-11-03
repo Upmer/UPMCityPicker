@@ -31,10 +31,9 @@
 }
 
 - (void)setupUI {
-    
     UILabel *titleLabel = [[UILabel alloc] init];
     self.titleLabel = titleLabel;
-    self.titleLabel.textColor = UIColor.lightGrayColor;
+    self.titleLabel.textColor = self.tintColor ?: UIColor.lightGrayColor;
     self.titleLabel.font = [UIFont systemFontOfSize:15];
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.titleLabel.backgroundColor = [UIColor.lightGrayColor colorWithAlphaComponent:0.2];
@@ -46,6 +45,13 @@
 - (void)setName:(NSString *)name {
     _name = name;
     self.titleLabel.text = name;
+}
+
+- (void)setTintColor:(UIColor *)tintColor {
+    _tintColor = tintColor;
+    if (tintColor) {
+        self.titleLabel.textColor = tintColor;
+    }
 }
 
 - (void)layoutSubviews {

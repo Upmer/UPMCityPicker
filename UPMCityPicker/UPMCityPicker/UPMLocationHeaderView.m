@@ -59,6 +59,13 @@
     [self.contentView addSubview:titleLabel];
 }
 
+- (void)setTintColor:(UIColor *)tintColor {
+    _tintColor = tintColor;
+    if (tintColor) {
+        [self.titleLabel setTitleColor:tintColor forState:UIControlStateNormal];
+    }
+}
+
 - (void)setName:(NSString *)name {
     _name = name;
     [self.titleLabel setTitle:name forState:UIControlStateNormal];

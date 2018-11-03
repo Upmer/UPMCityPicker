@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UPMExtraCityCell : UICollectionViewCell
 
 @property (nonatomic, copy) NSString *name;
+@property (nonatomic, strong) UIColor *tintColor;
 
 @end
 

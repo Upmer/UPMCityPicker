@@ -80,6 +80,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UPMExtraCityCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"extraCityCell" forIndexPath:indexPath];
     cell.name = self.cities[indexPath.item].name;
+    cell.tintColor = self.tintColor;
     return cell;
 }
 

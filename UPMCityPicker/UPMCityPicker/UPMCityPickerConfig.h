@@ -6,12 +6,18 @@
 //  Copyright © 2018 upmer. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface UPMCityPickerConfig : NSObject
 
 @property (nonatomic, strong) NSArray<NSString *> *hotCities;
 
 @property (nonatomic, assign, getter=isUseLocation) BOOL useLocation;
+
+@property (nonatomic, strong) UIColor *tintColor;
+
+@property (nonatomic, copy) NSString *navTitle;
+
+@property (nonatomic, strong) UIView *backView;
 
 @end
